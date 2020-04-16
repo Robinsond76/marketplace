@@ -1,11 +1,25 @@
 const express = require('express');
 const router = express.Router();
+const auth = require('../middleware/auth');
+const { check, validationResult } = require('express-validator');
+
+const User = require('../models/User');
+const Placard = require('../models/Placard');
 
 //@route    GET api/placards
 //@desc     Get all placards
 //@access   Public
-router.get('/', (req, res) => {
-  res.send('Get all placards');
+router.get('/', async (req, res) => {
+  try {
+    const placards = await Placard.find({}).sort({
+      date: -1,
+    });
+    console.log(placards);
+    res.json(placards);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
 });
 
 //@route    POST api/placards
