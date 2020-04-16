@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
     const placards = await Placard.find({}).sort({
       date: -1,
     });
-    console.log(placards);
+
     res.json(placards);
   } catch (err) {
     console.error(err.message);
@@ -25,9 +25,37 @@ router.get('/', async (req, res) => {
 //@route    POST api/placards
 //@desc     Add new placard
 //@access   Private
-router.post('/', (req, res) => {
-  res.send('Add placard');
-});
+router.post(
+  '/',
+  [auth, [check('title', 'title is required').not().isEmpty()]],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { title, desc, img, email, phone, type } = req.body;
+
+    try {
+      const newPlacard = new Placard({
+        title,
+        desc,
+        img,
+        email,
+        phone,
+        type,
+        user: req.user.id,
+      });
+
+      const placard = await newPlacard.save();
+
+      res.json(placard);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
+  }
+);
 
 //@route    PUT api/placards/:id
 //@desc     Update placard
