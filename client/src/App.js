@@ -4,6 +4,8 @@ import Navbar from './components/layout/Navbar.js';
 import About from './components/pages/About';
 import Home from './components/pages/Home';
 
+import PlacardState from './context/placards/PlacardState';
+
 import 'materialize-css/dist/css/materialize.min.css';
 import M from 'materialize-css/dist/js/materialize.min.js';
 
@@ -14,18 +16,20 @@ const App = () => {
   });
 
   return (
-    <Router>
-      <Fragment>
-        <Navbar />
-        <div className='container'>
-          <Switch>
-            <Route exact path='/about' component={About} />
-            <Route exact path='/' component={Home} />
-          </Switch>
-        </div>
-        ;
-      </Fragment>
-    </Router>
+    <PlacardState>
+      <Router>
+        <Fragment>
+          <Navbar />
+          <div className='container'>
+            <Switch>
+              <Route exact path='/about' component={About} />
+              <Route exact path='/' component={Home} />
+            </Switch>
+          </div>
+          ;
+        </Fragment>
+      </Router>
+    </PlacardState>
   );
 };
 
