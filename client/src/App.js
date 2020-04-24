@@ -4,6 +4,7 @@ import Navbar from './components/layout/Navbar.js';
 import About from './components/pages/About';
 import Home from './components/pages/Home';
 import PlacardForm from './components/placards/PlacardForm';
+import PlacardLarge from './components/placards/PlacardLarge';
 
 import PlacardState from './context/placards/PlacardState';
 
@@ -26,6 +27,7 @@ const App = () => {
               <Route exact path='/about' component={About} />
               <Route exact path='/' component={Home} />
               <Route exact path='/placard/new' component={PlacardForm} />
+              <Route exact path='/placard/:id' component={PlacardLarge} />
             </Switch>
           </div>
           ;

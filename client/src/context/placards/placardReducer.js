@@ -1,5 +1,6 @@
 import {
   GET_PLACARDS,
+  GET_PLACARD,
   ADD_PLACARD,
   DELETE_PLACARD,
   UPDATE_PLACARD,
@@ -13,6 +14,13 @@ export default (state, action) => {
       return {
         ...state,
         placards: [...state.placards, action.payload],
+      };
+    case GET_PLACARD:
+      return {
+        ...state,
+        placard: state.placards.filter(
+          (placard) => placard._id === action.payload
+        ),
       };
     default:
       return state;

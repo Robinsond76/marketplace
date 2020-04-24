@@ -2,7 +2,7 @@ import React, { useReducer, useContext } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import PlacardContext from './placardContext';
 import placardReducer from './placardReducer';
-import { ADD_PLACARD } from '../types';
+import { ADD_PLACARD, GET_PLACARD } from '../types';
 
 //custom hook to use context elsewhere
 export const usePlacards = () => {
@@ -13,11 +13,18 @@ export const usePlacards = () => {
 //actions
 
 export const addPlacard = (dispatch, placard) => {
-  placard.id = uuidv4();
+  placard._id = uuidv4();
 
   dispatch({
     type: ADD_PLACARD,
     payload: placard,
+  });
+};
+
+export const getPlacard = (dispatch, _id) => {
+  dispatch({
+    type: GET_PLACARD,
+    payload: _id,
   });
 };
 
@@ -64,6 +71,7 @@ const PlacardState = (props) => {
         __v: 0,
       },
     ],
+    placard: { test: 'never updated' },
   };
 
   const [state, dispatch] = useReducer(placardReducer, initialState);
