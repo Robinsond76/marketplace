@@ -1,7 +1,8 @@
 import React, { useReducer, useContext } from 'react';
-import uuid from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import PlacardContext from './placardContext';
 import placardReducer from './placardReducer';
+import { ADD_PLACARD } from '../types';
 
 //custom hook to use context elsewhere
 export const usePlacards = () => {
@@ -10,6 +11,15 @@ export const usePlacards = () => {
 };
 
 //actions
+
+export const addPlacard = (dispatch, placard) => {
+  placard.id = uuidv4();
+
+  dispatch({
+    type: ADD_PLACARD,
+    payload: placard,
+  });
+};
 
 const PlacardState = (props) => {
   const initialState = {

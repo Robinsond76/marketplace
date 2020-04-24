@@ -5,14 +5,22 @@ const Navbar = () => {
     <Fragment>
       <nav className='teal darken-4'>
         <div className='container'>
-          <div class='nav-wrapper'>
-            <a href='/' class='brand-logo'>
+          <div className='nav-wrapper'>
+            <a href='/' className='brand-logo'>
               Marketplace
             </a>
-            <a href='#!' data-target='mobile-menu' class='sidenav-trigger'>
-              <i class='material-icons'>menu</i>
+            <a href='#!' data-target='mobile-menu' className='sidenav-trigger'>
+              <i className='material-icons'>menu</i>
             </a>
-            <ul class='right hide-on-med-and-down'>
+            <ul className='right hide-on-med-and-down'>
+              <li>
+                <a
+                  className='btn waves-effect green btn-small'
+                  href='/placard/new'
+                >
+                  Create Ad
+                </a>
+              </li>
               <li>
                 <a href='/about'>About</a>
               </li>
@@ -27,7 +35,10 @@ const Navbar = () => {
         </div>
       </nav>
 
-      <ul class='sidenav' id='mobile-menu'>
+      <ul className='sidenav' id='mobile-menu'>
+        <li>
+          <a href='/placard/new'>Create Ad</a>
+        </li>
         <li>
           <a href='/about'>About</a>
         </li>
